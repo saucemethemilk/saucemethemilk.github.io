@@ -1,0 +1,39 @@
+<!DOCTYPE>
+<html>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+			Lock Status:<span id="openStatus"></span><br>
+			
+		<button id="connectbutton" onclick="start()">Refresh Data</button>
+		
+		<script type="text/javascript">
+					function start(objButton) {
+        		
+					var deviceID = "290045001147343438323536";
+        			var accessToken = "fb6a52c63bba984b1480f265259c95fdca831c3a";
+        			var baseURL = "https://api.particle.io/v1/devices/"
+
+			        var varName = "state";
+        			requestURL = baseURL + deviceID + "/" + varName + "/?access_token=" + accessToken;
+        			$.getJSON(requestURL, function(json) {
+                 			document.getElementById("openStatus").innerHTML = json.result;
+                 		});
+					}
+		</script>
+		
+		<form action="https://api.particle.io/v1/devices/290045001147343438323536/close?access_token=fb6a52c63bba984b1480f265259c95fdca831c3a" method="POST">
+				<input type="submit" value="Close Lock"><br>
+		</form>
+		
+		<form action="https://api.particle.io/v1/devices/290045001147343438323536/open?access_token=fb6a52c63bba984b1480f265259c95fdca831c3a" method="POST">
+				<input type="text" name="args" value="(Input Code)"><br>
+				<input type="submit" value="Open Lock">
+		</form>
+		
+		<form action="https://api.particle.io/v1/devices/290045001147343438323536/change?access_token=fb6a52c63bba984b1480f265259c95fdca831c3a" method="POST">
+				<input type="text" name="args" value="(Input New Code)"><br>
+				<input type="submit" value="Change Code">
+		</form>
+		
+	</body>
+</html>
